@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import './App.css'
+import React from 'react';
 
 function MovieCard({ movie, onAddToWatchlist, isInWatchlist }) {
   const movieData = {
@@ -163,6 +164,12 @@ function App() {
 
   const toggleTheme = () => {
     setIsDarkTheme(prev => !prev)
+  }
+
+  const handleGenreSelect = (e) => {
+    setSelectedGenre(e.target.value)
+    setActiveTab('search')  // Switch to search results tab
+    setCurrentPage(1)
   }
 
   const fetchGenres = async () => {
@@ -495,7 +502,7 @@ function App() {
         <select 
           className="genre-select"
           value={selectedGenre}
-          onChange={(e) => setSelectedGenre(e.target.value)}
+          onChange={handleGenreSelect} 
           aria-label="Filter by genre"
         >
           <option value="">All Genres</option>
