@@ -21,7 +21,6 @@ function MovieCard({ movie, onAddToWatchlist, isInWatchlist }) {
   const TMDB_API_KEY = '8a6179245484b380e72dcdb527c0f324';
 
   useEffect(() => {
-    // Only fetch details when we don't have them already
     const fetchMovieDetails = async () => {
       if (!movieDetails && movieData.id) {
         setIsLoading(true);
@@ -39,7 +38,6 @@ function MovieCard({ movie, onAddToWatchlist, isInWatchlist }) {
       }
     };
     
-    // Fetch on hover instead of on mount to save API calls
     const cardElement = document.getElementById(`movie-card-${movieData.id}`);
     if (cardElement) {
       cardElement.addEventListener('mouseenter', fetchMovieDetails);
@@ -57,7 +55,6 @@ function MovieCard({ movie, onAddToWatchlist, isInWatchlist }) {
     return '#FF5722'
   }
 
-  // Get certification (age rating)
   const getCertification = () => {
     if (!movieDetails?.release_dates?.results) return 'N/A';
     const usRating = movieDetails.release_dates.results.find(
@@ -83,7 +80,6 @@ function MovieCard({ movie, onAddToWatchlist, isInWatchlist }) {
         }}
       />
       
-      {/* Hover overlay with additional details */}
       <div className="movie-hover-overlay">
         <h3>{movieData.title}</h3>
         <div className="movie-details-grid">
@@ -250,7 +246,7 @@ function App() {
 
   const handleGenreSelect = (e) => {
     setSelectedGenre(e.target.value)
-    setActiveTab('search')  // Switch to search results tab
+    setActiveTab('search')  
     setCurrentPage(1)
   }
 
